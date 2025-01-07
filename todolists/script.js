@@ -9,8 +9,8 @@ addTaskBtn.addEventListener('click', () => {
 	const task = taskInput.value.trim(); //Get Input Value and trim WhiteSpaces
 	if (task !=="") {//Only add if the input is not empty
 		const li = document.createElement('li'); //Create a new list item
-		li.textContent = task;
+		li.textContent = task;//How we display user Input as a list item
 		taskList.appendChild(li);//Add it to the task list
-		taskInput.value = "";
+		taskInput.value = "";//Clears Values after click
 	}
 });
