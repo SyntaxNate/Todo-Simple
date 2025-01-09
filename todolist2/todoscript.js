@@ -8,10 +8,10 @@ addTaskBtn.addEventListener('click', () => {
 			const li = document.createElement('li');
 			li.textContent = task;
 
-			const deleteBtn = document.createElement('button');
-			deleteBtn.textContent = "Delete";
+			const deleteBtn = document.createElement('button');// Adding Delete button
+			deleteBtn.textContent = "Delete";//We have the delete button appear
 
-			deleteBtn.addEventListener('click', () => {
+			deleteBtn.addEventListener('click', () => { //Once clicked the delete button removes the list item
 				li.remove();
 			
 			});
