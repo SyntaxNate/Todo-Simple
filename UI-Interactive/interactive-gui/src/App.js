@@ -1,13 +1,11 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
+import LearnButton from "./components/LearnButton";
 
 function App() {
   return (
     <div style={{ margin: 40 }}>
-      <h1>Hello, Material UI!</h1>
-      <Button variant="contained" color="primary">
-        MUI Button
-      </Button>
+      <h1>Learn to build with Material UI</h1>
+      <LearnButton />
     </div>
   );
 }
