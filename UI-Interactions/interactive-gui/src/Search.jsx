@@ -1,47 +1,65 @@
 import { Button, Stack } from '@mui/material';
 import React, {useState} from "react";
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 const MotionButton = motion(Button);
 
-function App() {
-
-    const [query, setQuery] = useState("");
-    const [results, setResults] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+function SearchBars() {
+    
+    const [query, setQuery] =  useState("")
+    const [search, setSearch] = useState("");
 
 
     function handleInputChange(e) {
-        setQuery(e.target.value);
+        setQuery(e.target.value)
     }
 
-    async function handleSearch() {
-       setLoading(true);
-       setError(null);
-
-        try {
-        const res = await fetch("https://fakestoreapi.com/products");
-        const data = await res.json();
-
-        const filtered = data.filter(item => item.title.toLowerCase().includes(query.toLowerCase())
-      );
-
-      setResults(filtered);
-
-    } catch (err) {
-        console.log(err);
-        setError("Could not fetch products.");
+    function handleSearch (e) {
+        setSearch(e.target.value)
     }
-
-    setLoading(false);
-
-};
-
-   
 
     return(
-        <div style={{ padding: "2rem" }}>
+        
+        <div style={{ display: "flex", flexDirection: "column", gap:"15px", padding:"2rem" }}>
+
+            <div style={{ display: "flex", gap: "10px" }}>
+            <input style={{ padding: "1rem" }}
+                   type="text"
+                   value={search}
+                   placeholder='Search 1'
+                   onChange={handleSearch}
+            />
+
+                <MotionButton style={{ marginLeft:"10px" }} 
+                              variant="contained"
+                              whileTap={{ scale:0.9 }}
+                              whileHover={{ y: -4 }}
+                              onClick={handleSearch}  >
+                 Search
+                </MotionButton>
+            </div>
+
+                <div style={{ display: "flex", gap: "10px" }}>
+                <input
+                    style={{ padding: "1rem" }}
+                    type="text"
+                    value={search}
+                    placeholder='Search 2'
+                    onChange={handleSearch}
+                />
+
+                <MotionButton 
+                    variant="contained"
+                    whileTap={{ scale:0.9 }}
+                    whileHover={{ y: -4 }}
+                    onClick={handleSearch}>
+                    Search
+                </MotionButton>
+            </div>
+
+    <div style={{ padding: "2rem" }}>
             <p>Search Demo</p>
 
             {/* Search Bar (controlled by react state)*/}
@@ -56,26 +74,27 @@ function App() {
              variant="contained"
              whileTap={{ scale:0.9 }}
              whileHover={{ y: -4 }}
-             onClick={handleSearch}>
+             onClick={handleInputChange}>
                 Search
             </MotionButton>
+    </div>
+    
+    <div>
+        <MotionButton 
+        component={Link}
+        to='/'
+        style={{ marginLeft:"10px" }} 
+        variant="contained"
+        whileTap={{ scale:0.9 }}
+        whileHover={{ y: -4 }}>
+            Main Page
+        </MotionButton>
+    </div>
 
-            {/* Loading Feedback */}
-            {loading && <p>0Loading...</p>}
 
-            {/* Show Error */}
-            {error && <p style={{ color: "red" }}>{error}</p>}
+    </div>
 
-            {/* Show results */}
-            <ul>
-                {results.map(product => (
-                    <li key={product.id}>
-                       {product.title} 
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-}       
+    )
+} 
 
-export default App;
+export default SearchBars;

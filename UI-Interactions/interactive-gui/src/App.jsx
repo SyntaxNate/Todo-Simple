@@ -1,22 +1,35 @@
-import React from "react";
 import { Button, Stack } from '@mui/material';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import SearchBars from './Search';
+
 
 const MotionButton = motion(Button);
 
-function App() {
+function MainPage() {
+    
     return (
         <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '50px' }}>
+
+          <h1>
+            Main Page</h1>
+
+
             <Stack spacing={4}>
                 {/* Bounce Effect */}
                 <MotionButton 
                     variant="contained"
                     whileTap={{ scale:0.9 }}
                     whileHover={{ y: -4 }}
-                >
-                  Bounce Button
+                    component={Link}
+                    to="/search"
+                    >
+                  Search Bars
                 </MotionButton>
-
+              
+            
+        
                 {/* Rotate on Click */}
                 <MotionButton
                     variant="outlined"
@@ -45,7 +58,19 @@ function App() {
             </Stack>
 
         </div>
-    )
+    );
 }
+
+  function App() {
+    return(
+      <Routes>
+        {/* Main Page with Button Links */}
+        <Route path='/' element={<MainPage />} />
+
+        {/* Search Bars Page */}
+        <Route path='/search' element={<SearchBars />} />
+      </Routes>
+    );
+  }
 
 export default App;
